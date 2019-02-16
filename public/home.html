@@ -84,9 +84,13 @@ $(document).ready(function() {
     }, 7000);
   })
 
+
+  let fbName;
+
+
 window.fbAsyncInit = function() {
   FB.init({
-    appId: '1791323147839783',
+    appId: '2250222725221295',
     cookie: true, // enable cookies to allow the server to access 
     // the session
     xfbml: true, // parse social plugins on this page
@@ -110,12 +114,18 @@ window.fbAsyncInit = function() {
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));
 
+
+
 // Here we run a very simple test of the Graph API after login is
 // successful.  See statusChangeCallback() for when this call is made.
+
 function testAPI() {
   console.log('Welcome!  Fetching your information.... ');
   FB.api('/me', function(response) {
-    console.log('Successful login for: ' + response.name);
+    console.log('Successful login for:' );
+    console.log(response)
+    fbName = response
+    return fbName
     // document.getElementById('status').innerHTML =
     //   'Thanks for logging in, ' + response.name + '!';
   });
@@ -125,7 +135,7 @@ function testAPI() {
     console.log(fbData)
     $.get("/api/checkUser/" + fbData.authResponse.userID, function(data) {
       // if user exist then redirect to profile page
-      console.log(data.fbtoken, "asdfadsfadsfadsfsdf")
+      console.log(data, "asdfadsfadsfadsfsdf")
       if (data) {
         window.location.replace("/profile/" + data.fbtoken)
         
@@ -133,7 +143,7 @@ function testAPI() {
       // if doesnt exist create new user in db then redirect to profile page
       else {
         $.post("/api/newUser", {
-          userName: res.name,
+          
           fbtoken: fbID,
           img_url: "http://graph.facebook.com/" + fbID + "/picture?type=normal"
         })
@@ -159,8 +169,11 @@ function statusChangeCallback(response) {
   }
 }
 
-function checkLoginState() {
-  FB.getLoginStatus(function(response) {
+function checkLoginState(fbName) {
+  console.log(fbName)
+FB.getLoginStatus(function(response)  {
+  console.log(response)
+  
     if (response.status === 'connected') {
       checkUser(response);
     }
