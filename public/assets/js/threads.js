@@ -45,7 +45,7 @@ postThread: function (threadObject) {
 function jqueryStuffs() {
   window.fbAsyncInit = function() {
     FB.init({
-      appId      : '1791323147839783',
+      appId      : '2250222725221295',
       cookie     : true,  // enable cookies to allow the server to access 
                           // the session
       xfbml      : true,  // parse social plugins on this page
@@ -101,6 +101,7 @@ function jqueryStuffs() {
     var newThread;
     // Grabbing current users login token
     FB.getLoginStatus(function(response) {
+      console.log(response , 'res in threads js')
       usr_token = response.authResponse.userID;
       // Getting user data from database matching the current logged in user
       $.get("/api/checkUser/" + usr_token, function(res) {
