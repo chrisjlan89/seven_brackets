@@ -14,6 +14,7 @@
   // New Thread - Post / create
  
 postThread: function (threadObject) {
+  console.log('thred obj' , threadObject)
     $.post('/api/threads', threadObject, function(response) {
     })
   },
