@@ -106,6 +106,7 @@ function jqueryStuffs() {
       usr_token = response.authResponse.userID;
       // Getting user data from database matching the current logged in user
       $.get("/api/checkUser/" + usr_token, function(res) {
+        console.log(res, 'res inside check user')
         current_user = res.id;
         // Building thread object
         newThread = {

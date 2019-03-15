@@ -6,10 +6,10 @@ module.exports = function(sequelize, DataTypes) {
      categoryName : DataTypes.STRING
   
     })
-    Category.associate =  function(models){
-    Category.hasMany(models.Thread, {
-        onDelete: "cascade"
-      });
-    };
+    // Category.associate =  function(models){
+    // Category.hasMany(models.Thread, {
+    //     onDelete: "cascade"
+    //   });
+    // };
     return Category;
   }
